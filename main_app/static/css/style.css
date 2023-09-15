@@ -43,3 +43,9 @@ body {
 .right-links > a {
     padding: 3vh
 }
+
+footer {
+    margin-top: auto;
+    margin-left: auto;
+    font-size: smaller;
+}
