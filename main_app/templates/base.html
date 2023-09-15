@@ -13,18 +13,19 @@
     <header class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-                <ul>
-                    <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Home</a></li>
-                </ul>
+                <div class="left-links">
+                    <a href="{% url 'home' %}">Home</a>
+                </div>
+                <div class="right-links">
+                <a href="{% url 'about' %}">About</a>
+
                 {% if user.is_authenticated %}
-                <ul class="right">
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                <a href="{% url 'logout' %}">Log Out</a>
                 {% else %}
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'login' %}">Log In</a></li>
+                <a href="{% url 'signup' %}">Sign Up</a>
+                <a href="{% url 'login' %}">Log In</a>
+                </div>
                 {% endif %}
-                </ul>
             </div>
         </nav>
     </header>
