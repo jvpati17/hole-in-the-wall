@@ -16,8 +16,12 @@
                 <ul>
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Home</a></li>
                 </ul>
-                <ul class="right">
+                {% if user.is_authenticated %}
+                  <ul class="right">
                   <li><a href="{% url 'about' %}">About</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
                 </ul>
             </div>
         </nav>
