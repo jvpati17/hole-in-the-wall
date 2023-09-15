@@ -1,0 +1,45 @@
+body {
+    padding: 5vh;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #ffe8c0;
+  }
+
+.nav-wrapper {
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh;
+    width: 100%;
+}
+
+#logo > img {
+    width: 400px;
+}
+
+#logo {
+    margin-top: 10vh;
+}
+
+.left-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0 5vh;
+}
+
+.right-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 auto;
+}
+
+.right-links > a {
+    padding: 3vh
+}
