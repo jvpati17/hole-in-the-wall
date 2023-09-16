@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Restaurant
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -38,9 +39,14 @@ def restaurants_detail(request, restaurant_id):
         'restaurant': restaurant
     })
 
-class RestaurantCreate(CreateView):
+class RestaurantCreate(LoginRequiredMixin, CreateView):
     model = Restaurant
-    fields = ['name', 'address', 'city', 'state', 'zip_code', 'cuisine']
+    fields = ['name', 'address', 'city', 'state', 'zip_code', 'cuisine', 'dine_in', 'take_out', 'delivery', 'drive_thru']
+
+    def form_valid(self, form):
+        # Assign the logged-in user to the restaurant
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class RestaurantUpdate(UpdateView):
     model = Restaurant

@@ -21,10 +21,3 @@ class Restaurant(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
-
-    # THIS UPDATES VIEW TO ASSIGN NEW RESTAURANT TO LOGGED IN USER
-    # def form_valid(self, form):
-    # # Assign the logged in user (self.request.user)
-    # form.instance.user = self.request.user  # form.instance is the cat
-    # # Let the CreateView do its job as usual
-    # return super().form_valid(form)
