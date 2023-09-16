@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from .models import Restaurant
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -24,7 +26,27 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-# @login_required 
+def restaurants_index(request):
+    restaurants = Restaurant.objects.all()
+    return render(request, 'restaurants/index.html', {
+        'restaurants': restaurants
+    })
+
+def restaurants_detail(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant
+    })
+
+class RestaurantCreate(CreateView):
+    model = Restaurant
+    fields = ['name', 'address', 'city', 'state', 'zip_code', 'cuisine']
+
+class RestaurantUpdate(UpdateView):
+    model = Restaurant
+    fields = ['dine_in', 'take_out', 'delivery', 'drive_thru']
+
+# @login_required
 # def reviews_index(request):
 #   reviews = Review.objects.filter(user=request.user)
 #   # You could also retrieve the logged in user's reviews

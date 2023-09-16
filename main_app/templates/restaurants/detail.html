@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <div>
+        <span>{{ restaurant.name }}</span>
+        <p>Cuisine: {{ restaurant.cuisine }}</p>
+        <p>Options: </p>
+        {% if dine_in == True %}
+            <p>- Dine In</p>
+        {% if take_out == True %}
+            <p>- Take Out</p>
+        {% if delivery == True %}
+            <p>- Delivery</p>
+        {% if drive_thru == True %}
+            <p>- Drive Thru</p>
+    </div>
+    <div>
+        <a href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
+    </div>
+</div>
+
+{% endblock %}
