@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
+from .models import Restaurant
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import Restaurant
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
