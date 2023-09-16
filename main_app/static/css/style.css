@@ -4,7 +4,22 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-color: #ffe8c0;
+    font-family: 'Mukta', sans-serif;
   }
+
+a:link {
+    color: #db1919;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #7f0404;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
 
 .nav-wrapper {
     height: 5vh;
@@ -29,7 +44,15 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 0 5vh;
+    margin: 0 auto 0 0;
+}
+
+.left-links > a {
+    padding: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .right-links {
@@ -41,7 +64,23 @@ body {
 }
 
 .right-links > a {
-    padding: 3vh
+    padding: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    margin-top: 10vh;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    text-align: justify;
 }
 
 footer {
