@@ -11,14 +11,15 @@
                 <p>Address: {{ restaurant.address }}</p>
                 <p>City, State, Zipcode: {{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zip_code }}</p>
                 <p>Cuisine: {{ restaurant.cuisine }}</p>
+                <p>Options: </p>
                 {% if dine_in == True %}
-                    <p>Dine In</p>
+                    <p>- Dine In</p>
                 {% if take_out == True %}
-                    <p>Take Out</p>
+                    <p>- Take Out</p>
                 {% if delivery == True %}
-                    <p>Delivery</p>
+                    <p>- Delivery</p>
                 {% if drive_thru == True %}
-                    <p>Drive Thru</p>
+                    <p>- Drive Thru</p>
             </div>
         </div>
     </a>
