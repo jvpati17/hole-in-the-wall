@@ -31,6 +31,12 @@ def restaurants_index(request):
         'restaurants': restaurants
     })
 
+def restaurants_detail(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant
+    })
+
 # @login_required
 # def reviews_index(request):
 #   reviews = Review.objects.filter(user=request.user)
