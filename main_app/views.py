@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Restaurant
@@ -36,6 +37,14 @@ def restaurants_detail(request, restaurant_id):
     return render(request, 'restaurants/detail.html', {
         'restaurant': restaurant
     })
+
+class RestaurantCreate(CreateView):
+    model = Restaurant
+    fields = ['name', 'address', 'city', 'state', 'zip_code', 'cuisine']
+
+class RestaurantUpdate(UpdateView):
+    model = Restaurant
+    fields = ['dine_in', 'take_out', 'delivery', 'drive_thru']
 
 # @login_required
 # def reviews_index(request):
