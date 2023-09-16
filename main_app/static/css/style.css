@@ -32,6 +32,14 @@ body {
     margin: 0 auto 0 5vh;
 }
 
+.left-links > a {
+    padding: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .right-links {
     display: flex;
     flex-direction: row;
@@ -41,7 +49,15 @@ body {
 }
 
 .right-links > a {
-    padding: 3vh
+    padding: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    margin-top: 10vh;
 }
 
 footer {
