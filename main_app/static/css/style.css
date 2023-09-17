@@ -170,3 +170,15 @@ footer {
     margin-right: 30px;
     height: 20px;
 }
+
+.submit_form input[type="checkbox"]:checked {
+    margin-right: 30px;
+    height: 20px;
+    background-color: #320101;
+}
+
+.submit_form input[type="text"],
+.submit_form input[type="number"] {
+    margin-left: 60px;
+    width: 30vh;
+}
