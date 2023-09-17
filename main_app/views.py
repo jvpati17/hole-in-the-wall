@@ -65,12 +65,19 @@ def unassoc_day(request, restaurant_id, day_id):
     return redirect('detail', restaurant_id=restaurant_id)
 
 def add_review(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
     form = ReviewForm(request.POST)
     if form.is_valid():
         new_review = form.save(commit=False)
         new_review.restaurant_id = restaurant_id
         new_review.save()
-    return redirect('details', restaurant_id=restaurant_id)
+    else:
+        form = ReviewForm()
+
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant,
+        'review_form': form,
+    })
 
 # @login_required
 # def reviews_index(request):
