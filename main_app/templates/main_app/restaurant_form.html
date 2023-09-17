@@ -1,4 +1,4 @@
-{% extends 'base-ext.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
 {% if object %}
@@ -9,12 +9,14 @@
 
 
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
-<form action="" method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
-</form>
+<div class="submit_form">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 
 {% endblock %}
