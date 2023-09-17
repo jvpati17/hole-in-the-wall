@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+
 DAYS_OF_WEEK = (
     ('SU', 'Sunday'),
     ('MO', 'Monday'),
@@ -11,6 +12,11 @@ DAYS_OF_WEEK = (
     ('TH', 'Thursday'),
     ('FR', 'Friday'),
     ('SA', 'Saturday'),
+)
+
+OPTIONS = (
+    ('R_R', 'Restaurant Review'),
+    ('A_R', 'Alternate Recommendation')
 )
 
 # Create your models here.
@@ -48,3 +54,18 @@ class Restaurant(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
+    
+class Review(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    review = models.CharField(
+        max_length=300,
+        choices=OPTIONS,
+        default=OPTIONS[0][0]
+    )
+    restaurant = models.ForeignKey(
+        Restaurant, 
+        on_delete=models.CASCADE
+    )
+    def __str__(self):
+        return  f"{self.get_review_display()} on {self.created_at}"
