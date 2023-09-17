@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div>
+<div class="rest-details">
     <div>
         <span>{{ restaurant.name }}</span>
             <p>Address: {{ restaurant.address }}</p>
@@ -24,6 +24,7 @@
 </div>
     <div>
         <a href="{% url 'restaurants_update' restaurant.id %}">Edit</a>
+        <a href="{% url 'restaurants_delete' restaurant.id %}">Delete</a>
     </div>
 </div>
 
