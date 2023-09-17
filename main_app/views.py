@@ -50,7 +50,7 @@ class RestaurantCreate(LoginRequiredMixin, CreateView):
 
 class RestaurantUpdate(UpdateView):
     model = Restaurant
-    fields = ['opening_time', 'closing_time', 'days', 'dine_in', 'take_out', 'delivery', 'drive_thru']
+    fields = ['dine_in', 'take_out', 'delivery', 'drive_thru']
 
 class RestaurantDelete(DeleteView):
     model = Restaurant
