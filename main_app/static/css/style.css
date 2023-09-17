@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     background-color: #ffe8c0;
     font-family: 'Mukta', sans-serif;
+    text-align: center;
   }
 
 a:link {
@@ -19,6 +20,10 @@ a:visited {
 
 a:hover {
     text-decoration: underline;
+}
+
+a > img {
+    width: 50px;
 }
 
 .nav-wrapper {
@@ -36,10 +41,17 @@ a:hover {
 }
 
 #logo {
-    margin-top: 10vh;
+    background-image: url('../../static/images/header-img.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 25vh;
+    width: 33%;
+    margin-top: 3vh;
 }
 
 .left-links {
+    width: 32%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -56,6 +68,7 @@ a:hover {
 }
 
 .right-links {
+    width: 35%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,6 +94,15 @@ h2 {
 
 p {
     text-align: justify;
+}
+
+.rest-card {
+    background-color: white;
+    border: solid #db1919;
+    border-radius: 10px;
+    margin: 1vh auto 1vh auto;
+    padding: 2vh;
+    width: 50%;
 }
 
 footer {
