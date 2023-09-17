@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Restaurant
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -51,6 +51,18 @@ class RestaurantCreate(LoginRequiredMixin, CreateView):
 class RestaurantUpdate(UpdateView):
     model = Restaurant
     fields = ['opening_time', 'closing_time', 'days', 'dine_in', 'take_out', 'delivery', 'drive_thru']
+
+class RestaurantDelete(DeleteView):
+    model = Restaurant
+    success_url = '/restaurants'
+
+def assoc_day(request, restaurant_id, day_id):
+    Restaurant.objects.get(id=restaurant_id).days.add(day_id)
+    return redirect('detail', restaurant_id=restaurant_id)
+
+def unassoc_day(request, restaurant_id, day_id):
+    Restaurant.objects.get(id=restaurant_id).days.remove(day_id)
+    return redirect('detail', restaurant_id=restaurant_id)
 
 # @login_required
 # def reviews_index(request):
