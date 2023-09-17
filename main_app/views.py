@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-
+from .forms import ReviewForm
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -63,6 +63,14 @@ def assoc_day(request, restaurant_id, day_id):
 def unassoc_day(request, restaurant_id, day_id):
     Restaurant.objects.get(id=restaurant_id).days.remove(day_id)
     return redirect('detail', restaurant_id=restaurant_id)
+
+def add_review(request, restaurant_id):
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+        new_review = form.save(commit=False)
+        new_review.restaurant_id = restaurant_id
+        new_review.save()
+    return redirect('details', restaurant_id=restaurant_id)
 
 # @login_required
 # def reviews_index(request):
