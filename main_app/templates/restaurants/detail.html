@@ -28,4 +28,58 @@
     </div>
 </div>
 
+<div class="row">
+
+      <h3>{{ restaurant.name }}'s Days Open</h3>
+      {% if restaurant.days.count %}
+        {% for day in restaurant.days.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                {{ day.name }}
+              </span>
+              <span class="card-hours">
+                {{ day.opening_time }} - {{ day.closing_time }}
+              </span>
+            </div>
+            <div class="card-action">
+              <form action="{% url 'unassoc_day' restaurant.id day.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Remove</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>Closed</h5>
+      {% endif %}
+    </div>
+    <!-- Available toys will come after this line -->
+    <div class="col s6">
+      <h3>Available Days</h3>
+      {% if days.count %}
+        {% for day in days.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                {{ day.name }}
+              </span>
+              <span class="card-hours">
+                {{ day.opening_time }} - {{ day.closing_time }}
+              </span>
+            </div>
+            <div class="card-action">
+              <form action="{% url 'assoc_day' restaurant.id day.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Add</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>{{restaurant.name}} is current on its hours.</h5>
+      {% endif %}
+
+  </div>
+
 {% endblock %}
