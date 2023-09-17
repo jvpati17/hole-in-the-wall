@@ -84,7 +84,6 @@
 
   <form action="{% url 'add_review' restaurant.id %}" method="POST">
     {% csrf_token %}
-    <!-- Render the inputs -->
     {{ review_form.as_p }}
     <input type="submit" class="btn" value="Add Review">
   </form>
@@ -103,7 +102,6 @@
     </tbody>
   </table>
 </div>
-<!-- New Markup Above -->
 </div>
 
 {% endblock %}

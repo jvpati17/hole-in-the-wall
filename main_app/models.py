@@ -67,3 +67,6 @@ class Review(models.Model):
     )
     def __str__(self):
         return  f"{self.get_review_display()} on {self.created_at}"
+    
+    def get_absolute_url(self):
+        return reverse('add_review', kwargs={'restaurant_id': self.id})
