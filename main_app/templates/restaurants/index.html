@@ -1,11 +1,11 @@
 {% extends 'base-ext.html' %}
 {% block content %}
 
-<h1>Restaurant List</h1>
+<h2>Restaurant List</h2>
 
 {% for restaurant in restaurants %}
-    <a href="{% url 'detail' restaurant.id %}">
-        <div>
+    <div class="rest-card">
+        <a href="{% url 'detail' restaurant.id %}">
             <div>
                 <span>{{ restaurant.name }}</span>
                 <p>Address: {{ restaurant.address }}</p>
@@ -25,8 +25,8 @@
                     <p>- Drive Thru</p>
                 {% endif %}
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
 {% endfor %}
 
 
