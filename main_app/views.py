@@ -50,7 +50,7 @@ class RestaurantCreate(LoginRequiredMixin, CreateView):
 
 class RestaurantUpdate(UpdateView):
     model = Restaurant
-    fields = ['dine_in', 'take_out', 'delivery', 'drive_thru']
+    fields = ['opening_time', 'closing_time', 'days', 'dine_in', 'take_out', 'delivery', 'drive_thru']
 
 # @login_required
 # def reviews_index(request):

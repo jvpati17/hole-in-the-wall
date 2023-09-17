@@ -14,6 +14,21 @@ DAYS_OF_WEEK = (
 )
 
 # Create your models here.
+class Days(models.Model):
+    days = models.CharField(
+        max_length=2,
+        choices=DAYS_OF_WEEK,
+        default=DAYS_OF_WEEK[0][0]
+    )
+    opening_time = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(24)])
+    closing_time =models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(24)])
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.id})
+
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,14 +41,7 @@ class Restaurant(models.Model):
     take_out = models.BooleanField(default=False)
     delivery = models.BooleanField(default=False)
     drive_thru = models.BooleanField(default=False)
-    opening_time = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(12)])
-    closing_time =models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(12)])
-    days = models.CharField(
-        max_length=2,
-        choices=DAYS_OF_WEEK,
-        default=DAYS_OF_WEEK[0][0]
-    )
-
+    days = models.ManyToManyField(Days)
 
     def __str__(self):
         return self.name
