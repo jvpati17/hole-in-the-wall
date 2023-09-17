@@ -60,8 +60,6 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     review = models.CharField(
         max_length=300,
-        choices=OPTIONS,
-        default=OPTIONS[0][0]
     )
     restaurant = models.ForeignKey(
         Restaurant, 
