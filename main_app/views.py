@@ -7,7 +7,7 @@ from django.views.generic import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .forms import ReviewForm
+from .forms import ReviewForm, DayForm
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -37,8 +37,10 @@ def restaurants_index(request):
 
 def restaurants_detail(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
+    days = Day.objects.all()
     return render(request, 'restaurants/detail.html', {
-        'restaurant': restaurant
+        'restaurant': restaurant,
+        'days': days
     })
 
 class RestaurantCreate(LoginRequiredMixin, CreateView):
@@ -57,10 +59,11 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
     model = Restaurant
     success_url = '/restaurants'
+    
 
 class DayCreate(CreateView):
     model = Day
-    fields = ['opening_time', 'closing_time']
+    fields = ['days', 'opening_time', 'closing_time']
 
 class DayDetail(DetailView):
     model = Day
@@ -80,13 +83,19 @@ class DayDelete(DeleteView):
         else:
             return reverse_lazy('index')
 
-def assoc_day(request, restaurant_id, day_id):
-    Restaurant.objects.get(id=restaurant_id).days.add(day_id)
-    return redirect('detail', restaurant_id=restaurant_id)
-
-def unassoc_day(request, restaurant_id, day_id):
-    Restaurant.objects.get(id=restaurant_id).days.remove(day_id)
-    return redirect('detail', restaurant_id=restaurant_id)
+def add_day(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    form = DayForm(request.POST)
+    if form.is_valid():
+        new_day = form.save(commit=False)
+        new_day.restaurant_id = restaurant_id
+        new_day.save()
+    else:
+        form = DayForm()
+    return render(request, 'restaurants/detail.html', {
+        'restaurant': restaurant,
+        'day_form': form,
+    })
 
 def add_review(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
