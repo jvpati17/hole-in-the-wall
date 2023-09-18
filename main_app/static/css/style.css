@@ -92,11 +92,23 @@ h2 {
     text-align: center;
 }
 
+h3 {
+    margin-top: -1vh;
+}
+
 p {
     text-align: justify;
 }
 
-.rest-card {
+#whole-page{
+    padding: 3vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.rest-card, .rest-details {
     background-color: white;
     border: solid #db1919;
     border-radius: 10px;
@@ -105,10 +117,12 @@ p {
     width: 50%;
 }
 
-footer {
-    margin-top: auto;
-    margin-left: auto;
-    font-size: smaller;
+#edit-btn {
+    margin: 0 5vh 0 0
+}
+
+#del-btn {
+    margin: 0 0 0 5vh;
 }
 
 .submit_form {
@@ -120,7 +134,7 @@ footer {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
     -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
     -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-
+    
 }
 
 .submit_form input,
@@ -181,4 +195,41 @@ footer {
 .submit_form input[type="number"] {
     margin-left: 60px;
     width: 30vh;
+}
+
+.btn {
+    background-color: white;
+    color: #320101;
+    border: solid #db1919;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+table{
+    margin: 0 auto 0 auto;
+    width: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+tr {
+    width: 60vh;
+}
+
+th {
+    width: 30vh;
+}
+
+td {
+    width: 30vh;
+}
+
+
+footer {
+    margin-top: auto;
+    margin-left: auto;
+    font-size: smaller;
 }

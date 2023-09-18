@@ -6,12 +6,10 @@
 {% for restaurant in restaurants %}
     <div class="rest-card">
         <div>
-            <span><a href="{% url 'detail' restaurant.id %}">{{ restaurant.name }}</a></span>
+            <span><a href="{% url 'detail' restaurant.id %}"><h3>{{ restaurant.name }}</h3></a></span>
                 <p>Address: {{ restaurant.address }}</p>
                 <p>{{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zip_code }}</p>
                 <p>Cuisine: {{ restaurant.cuisine }}</p>
-                <p>Days: {{ restaurant.days }}</p>
-                <p>Hours: {{ restaurant.opening_time }} - {{ restaurant.closing_time }}</p>
                 <p>Options: </p>
                 {% if restaurant.dine_in %}
                 <p>- Dine In</p>
