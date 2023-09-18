@@ -20,7 +20,7 @@ OPTIONS = (
 )
 
 # Create your models here.
-class Days(models.Model):
+class Day(models.Model):
     days = models.CharField(
         max_length=2,
         choices=DAYS_OF_WEEK,
@@ -33,7 +33,7 @@ class Days(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'pk': self.id})
+        return reverse('days_detail', kwargs={'pk': self.id})
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
@@ -47,14 +47,14 @@ class Restaurant(models.Model):
     take_out = models.BooleanField(default=False)
     delivery = models.BooleanField(default=False)
     drive_thru = models.BooleanField(default=False)
-    days = models.ManyToManyField(Days)
+    days = models.ManyToManyField(Day)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'restaurant_id': self.id})
-    
+
 class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -62,11 +62,11 @@ class Review(models.Model):
         max_length=300,
     )
     restaurant = models.ForeignKey(
-        Restaurant, 
+        Restaurant,
         on_delete=models.CASCADE
     )
     def __str__(self):
         return  f"{self.get_review_display()} on {self.created_at}"
-    
+
     def get_absolute_url(self):
         return reverse('add_review', kwargs={'restaurant_id': self.id})

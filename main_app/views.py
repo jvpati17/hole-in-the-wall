@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Restaurant
+from .models import Restaurant, Day
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -55,6 +56,22 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
     model = Restaurant
     success_url = '/restaurants'
+
+class DayCreate(CreateView):
+    model = Day
+    fields = ['opening_time', 'closing_time']
+
+class DayDetail(DetailView):
+    model = Day
+
+class DayUpdate(UpdateView):
+    model = Day
+    fields = ['opening_time', 'closing_time']
+
+class DayDelete(DeleteView):
+    model = Day
+    success_url = '/days'
+
 
 def assoc_day(request, restaurant_id, day_id):
     Restaurant.objects.get(id=restaurant_id).days.add(day_id)
