@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
 from .models import Restaurant, Day
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -72,9 +73,12 @@ class DayDelete(DeleteView):
     model = Day
 
     def get_success_url(self):
-        pk = self.kwargs['pk']
-        restaurant_id = Day.objects.filter(pk = pk).first().restaurant_id
-        return reverse('detail', restaurant_id = restaurant_id)
+        restaurants = self.object.restaurant_set.all()
+        if restaurants.exists():
+            restaurant = restaurants.first()
+            return reverse_lazy('detail', kwargs={'retaurant_id': restaurant.pk})
+        else:
+            return reverse_lazy('index')
 
 def assoc_day(request, restaurant_id, day_id):
     Restaurant.objects.get(id=restaurant_id).days.add(day_id)
