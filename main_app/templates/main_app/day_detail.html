@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Hours of Operation</h1>
+
+<div>
+    <div>
+        <div>
+        <div>
+            <span>{{ day.days }}</span>
+            <p>Hours: {{ day.opening_time }} - {{ day.closing_time }}</p>
+        </div>
+        <div>
+            <a href="{% url 'days_update' day.id %}">Edit</a>
+            <a href="{% url 'days_delete' day.id %}">Delete</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

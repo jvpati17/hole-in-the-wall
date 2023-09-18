@@ -13,4 +13,6 @@ urlpatterns = [
     path('restaurants/<int:restaurant_id>/assoc_day/<int:day_id>', views.assoc_day, name='assoc_day'),
     path('restaurants/<int:restaurant_id>/unassoc_day/<int:day_id>', views.unassoc_day, name='unassoc_day'),
     path('restaurants/<int:restaurant_id>/add_review/', views.add_review, name='add_review'),
+    path('days/create/<int:restaurant_id>/', views.DayCreate.as_view(), name='days_create'),
+    path('days/detail/<int:pk>/', views.DayDetail.as_view(), name='days_detail'),
 ]
