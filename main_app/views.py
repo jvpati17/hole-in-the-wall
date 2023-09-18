@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .models import Restaurant, Day
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -70,8 +70,11 @@ class DayUpdate(UpdateView):
 
 class DayDelete(DeleteView):
     model = Day
-    success_url = '/days'
 
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        restaurant_id = Day.objects.filter(pk = pk).first().restaurant_id
+        return reverse('detail', restaurant_id = restaurant_id)
 
 def assoc_day(request, restaurant_id, day_id):
     Restaurant.objects.get(id=restaurant_id).days.add(day_id)
