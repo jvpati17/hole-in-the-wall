@@ -11,7 +11,6 @@ urlpatterns = [
     path('restaurants/<int:pk>/update/', views.RestaurantUpdate.as_view(), name='restaurants_update'),
     path('restaurants/<int:pk>/delete', views.RestaurantDelete.as_view(), name='restaurants_delete'),
     path('restaurants/<int:restaurant_id>/add_review/', views.add_review, name='add_review'),
-    path('restaurants/<int:pk>/update_review/', views.UpdateReview.as_view(), name='update_review'),
     path('restaurants/<int:pk>/delete_review/', views.DeleteReview.as_view(), name='delete_review'),
     path('restaurant/<int:restaurant_id>/add_day', views.add_day, name='add_day'),
     path('restaurant/<int:restaurant_id>/add_photo', views.add_photo, name='add_photo'),
