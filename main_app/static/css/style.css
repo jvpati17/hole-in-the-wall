@@ -103,8 +103,8 @@ p {
 #whole-page{
     padding: 3vh;
     display: flex;
-    flex-direction: row;
-    /* align-items: center; */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -118,20 +118,44 @@ p {
 }
 
 .rest-section {
-    width: 40vh;
+    width: 100vh;
     margin-right: 10vh;
 }
-
-.rest-details {
+.rest-border-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     border: solid #db1919;
     border-radius: 10px;
-    margin: 1vh auto 1vh auto;
+}
+
+.rest-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1vh 5vh 1vh auto;
     padding: 2vh;
+    width: 40vh;
+}
+
+.rest-details > span {
+    width: 100vh;
+}
+
+.rest-details > p {
+    text-align: left;
 }
 
 .days-details {
     width: 30vh;
+    margin-left: 30vhvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .reviews {
@@ -226,6 +250,19 @@ p {
     border-radius: 5px;
     font-size: 14px;
     padding: 10px;
+}
+
+.photo-display {
+    width: 20vh;
+}
+
+.photo-display > img {
+    width: 200px;
+    border: solid #db1919;
+}
+
+.upload-btn {
+    margin: 1vh;
 }
 
 table{
