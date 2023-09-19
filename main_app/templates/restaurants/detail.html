@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="whole-page">
-    <div class="rest-details">
-        <div>
+    <div class="rest-section">
+        <div class="rest-details">
             <span><h3>{{ restaurant.name }}</h3></span>
             <p>Address: {{ restaurant.address }}</p>
             <p>{{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zip_code }}</p>
@@ -29,16 +29,16 @@
 
     <div class="days-details">
         <div class="days-form">
-            <form action="{% url 'add_day' restaurant.id %}" method="POST">
-                {% csrf_token %}
-                {{ day_form.as_p }}
-                <input type="submit" class="btn" value="Add Hours">
-            </form>
             <br>
             <h3>Open:</h3>
             {% for day in restaurant.day_set.all %}
             <p>{{ day.days }}: {{ day.opening_time }} - {{ day.closing_time }}</p>
             {% endfor %}
+            <form action="{% url 'add_day' restaurant.id %}" method="POST">
+                {% csrf_token %}
+                {{ day_form.as_p }}
+                <input type="submit" class="btn" value="Add Hours">
+            </form>
         </div>
     </div>
 
@@ -57,8 +57,8 @@
             <tbody>
                 {% for review in restaurant.review_set.all %}
                 <tr>
-                    <td>{{review.created_at}}</td>
-                    <td>{{review.review}}</td>
+                    <td class="review-date">{{review.created_at}}</td>
+                    <td class="review-text">{{review.review}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

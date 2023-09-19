@@ -51,7 +51,7 @@ class Day(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.get_days_display()
 
     def get_absolute_url(self):
         return reverse('days_detail', kwargs={'pk': self.id})
