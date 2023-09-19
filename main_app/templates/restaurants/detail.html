@@ -75,14 +75,10 @@
             <tbody>
                 {% for review in restaurant.review_set.all %}
                 <tr>
-
-                    <td>{{review.created_at}}</td>
-                    <td>{{review.review}}</td>
-                    <a href="{% url 'update_review' review.id %}">Edit Review</a>
-                    <a href="{% url 'delete_review' review.id %}">Delete Review</a>
                     <td class="review-date">{{review.created_at}}</td>
                     <td class="review-text">{{review.review}}</td>
-
+                    <a href="{% url 'update_review' review.id %}">Edit Review</a>
+                    <a href="{% url 'delete_review' review.id %}">Delete Review</a>
                 </tr>
                 {% endfor %}
             </tbody>
