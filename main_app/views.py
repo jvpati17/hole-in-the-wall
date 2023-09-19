@@ -9,7 +9,7 @@ from django.views.generic import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Restaurant, Day, Photo
+from .models import Restaurant, Day, Photo, DAYS_OF_WEEK
 from .forms import ReviewForm, DayForm
 # Create your views here.
 def home(request):
@@ -62,7 +62,7 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
     model = Restaurant
     success_url = '/restaurants'
-    
+
 
 class DayCreate(CreateView):
     model = Day
@@ -88,8 +88,17 @@ class DayDelete(DeleteView):
 
 def add_day(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
+
+    days_count = restaurant.day_set.count()
+    available_days = len(DAYS_OF_WEEK)
+
+    if days_count == available_days:
+        add_hours = False
+    else:
+        add_hours = True
+
     form = DayForm(request.POST)
-    if form.is_valid():
+    if add_hours and form.is_valid():
         new_day = form.save(commit=False)
         new_day.restaurant_id = restaurant_id
         new_day.save()
