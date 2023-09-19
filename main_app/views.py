@@ -1,12 +1,15 @@
+import uuid
+import boto3
+import os
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
-from .models import Restaurant, Day, DAYS_OF_WEEK
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .models import Restaurant, Day, Photo, DAYS_OF_WEEK
 from .forms import ReviewForm, DayForm
 # Create your views here.
 def home(request):
@@ -126,3 +129,18 @@ def add_review(request, restaurant_id):
 #   reviews = Review.objects.filter(user=request.user)
 #   # You could also retrieve the logged in user's reviews
 #   return render(request, 'reviews/index.html', { 'reviews': reviews })
+
+def add_photo(request, restaurant_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.create(url=url, restaurant_id=restaurant_id)
+        except Exception as e:
+            print('An error occured uploading file to S3')
+            print(e)
+    return redirect('detail', restaurant_id=restaurant_id)
