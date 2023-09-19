@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
-from .models import Restaurant, Day
+from .models import Restaurant, Day, DAYS_OF_WEEK
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
@@ -59,7 +59,7 @@ class RestaurantUpdate(UpdateView):
 class RestaurantDelete(DeleteView):
     model = Restaurant
     success_url = '/restaurants'
-    
+
 
 class DayCreate(CreateView):
     model = Day
@@ -85,8 +85,17 @@ class DayDelete(DeleteView):
 
 def add_day(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
+
+    days_count = restaurant.day_set.count()
+    available_days = len(DAYS_OF_WEEK)
+
+    if days_count == available_days:
+        add_hours = False
+    else:
+        add_hours = True
+
     form = DayForm(request.POST)
-    if form.is_valid():
+    if add_hours and form.is_valid():
         new_day = form.save(commit=False)
         new_day.restaurant_id = restaurant_id
         new_day.save()
