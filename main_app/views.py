@@ -3,17 +3,13 @@ import boto3
 import os
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
-<<<<<<< HEAD
-=======
-from .models import Restaurant, Day, DAYS_OF_WEEK
->>>>>>> main
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Restaurant, Day, Photo
+from .models import Restaurant, Day, Photo, DAYS_OF_WEEK
 from .forms import ReviewForm, DayForm
 # Create your views here.
 def home(request):
