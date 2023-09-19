@@ -74,7 +74,7 @@ class DayDetail(DetailView):
 
 class DayUpdate(UpdateView):
     model = Day
-    fields = ['opening_time', 'closing_time']
+    fields = ['days', 'opening_time', 'closing_time', 'opening_hours', 'closing_hours']
 
 class DayDelete(DeleteView):
     model = Day

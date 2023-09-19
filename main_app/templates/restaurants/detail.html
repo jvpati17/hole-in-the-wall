@@ -38,11 +38,15 @@
                         </form>
                 </div>
             </div>
+            <div class="edit-and-del">
+                <a href="{% url 'days_update' restaurant.id %}" id="edit-btn">Edit Hours</a>
+            </div>
+            </div>
         </div>
-                <div class="edit-and-del">
-                    <a href="{% url 'restaurants_update' restaurant.id %}" id="edit-btn">Edit</a>
-            <a href="{% url 'restaurants_delete' restaurant.id %}" id="del-btn">Delete</a>
-        </div>
+            <div class="edit-and-del">
+                <a href="{% url 'restaurants_update' restaurant.id %}" id="edit-btn">Edit</a>
+                <a href="{% url 'restaurants_delete' restaurant.id %}" id="del-btn">Delete</a>
+            </div>
     </div>
 
 
