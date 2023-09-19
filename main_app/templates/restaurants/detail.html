@@ -62,9 +62,12 @@
     </form>
     <br>
     <div class="reviews">
-        <a href="{% url 'add_review' restaurant.id %}">Add Review</a>
-      <br>
-      <br>
+        <form action="{% url 'add_review' restaurant.id %}" method="POST">
+            {% csrf_token %}
+            {{ review_form.as_p }}
+            <input type="submit" class="btn" value="Add Review">
+        </form>
+        <br>
         <table class="striped">
             <thead>
                 <tr><th>Date</th><th>Review</th></tr>
@@ -74,8 +77,8 @@
                 <tr>
                     <td class="review-date">{{review.created_at}}</td>
                     <td class="review-text">{{review.review}}</td>
-                    <a href="{% url 'review_update' review.id %}">Edit Review</a>
-                    <a href="{% url 'review_delete' review.id %}">Delete Review</a>
+                    <a href="{% url 'update_review' review.id %}">Edit Review</a>
+                    <a href="{% url 'delete_review' review.id %}">Delete Review</a>
                 </tr>
                 {% endfor %}
             </tbody>
