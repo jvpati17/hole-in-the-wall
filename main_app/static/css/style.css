@@ -104,18 +104,40 @@ p {
     padding: 3vh;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
 }
 
-.rest-card, .rest-details {
+.rest-card {
     background-color: white;
     border: solid #db1919;
     border-radius: 10px;
     margin: 1vh auto 1vh auto;
     padding: 2vh;
-    width: 50%;
+    width: 40vh
 }
+
+.rest-section {
+    width: 40vh;
+    margin-right: 10vh;
+}
+
+.rest-details {
+    background-color: white;
+    border: solid #db1919;
+    border-radius: 10px;
+    margin: 1vh auto 1vh auto;
+    padding: 2vh;
+}
+
+.days-details {
+    width: 30vh;
+}
+
+.reviews {
+    width: 80vh;
+}
+
 
 #edit-btn {
     margin: 0 5vh 0 0
@@ -227,6 +249,11 @@ td {
     width: 30vh;
 }
 
+.review-text {
+    width: 45vh;
+    text-align: left;
+    margin-left: 5vh;
+}
 
 footer {
     margin-top: auto;
