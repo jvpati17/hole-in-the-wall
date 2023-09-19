@@ -3,6 +3,10 @@ import boto3
 import os
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
+
+from .models import Restaurant, Day, Review
+=======
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
@@ -123,6 +127,14 @@ def add_review(request, restaurant_id):
         'restaurant': restaurant,
         'review_form': form,
     })
+
+class UpdateReview(UpdateView):
+    model = Review
+    fields = '__all__'
+
+class DeleteReview(DeleteView):
+    model = Review
+    success_url = '/restaurants'
 
 # @login_required
 # def reviews_index(request):
