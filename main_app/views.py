@@ -125,10 +125,6 @@ def add_review(request, restaurant_id):
         'review_form': form,
     })
 
-class UpdateReview(UpdateView):
-    model = Review
-    fields = '__all__'
-
 class DeleteReview(DeleteView):
     model = Review
     success_url = '/restaurants'

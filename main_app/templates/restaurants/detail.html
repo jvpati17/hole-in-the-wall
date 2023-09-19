@@ -70,15 +70,14 @@
         <br>
         <table class="striped">
             <thead>
-                <tr><th>Date</th><th>Review</th></tr>
+                <tr><th>Date</th><th>Review</th><th></th></tr>
             </thead>
             <tbody>
                 {% for review in restaurant.review_set.all %}
                 <tr>
                     <td class="review-date">{{review.created_at}}</td>
                     <td class="review-text">{{review.review}}</td>
-                    <a href="{% url 'update_review' review.id %}">Edit Review</a>
-                    <a href="{% url 'delete_review' review.id %}">Delete Review</a>
+                    <a href="{% url 'delete_review' review.id %}">X</a>
                 </tr>
                 {% endfor %}
             </tbody>
