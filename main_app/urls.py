@@ -12,6 +12,7 @@ urlpatterns = [
     path('restaurants/<int:pk>/delete', views.RestaurantDelete.as_view(), name='restaurants_delete'),
     path('restaurants/<int:restaurant_id>/add_review/', views.add_review, name='add_review'),
     path('restaurant/<int:restaurant_id>/add_day', views.add_day, name='add_day'),
+    path('restaurant/<int:restaurant_id>/add_photo', views.add_photo, name='add_photo'),
     path('days/create/<int:restaurant_id>/', views.DayCreate.as_view(), name='days_create'),
     path('days/detail/<int:pk>/', views.DayDetail.as_view(), name='days_detail'),
     path('days/<int:pk>/update/', views.DayUpdate.as_view(), name='days_update'),
