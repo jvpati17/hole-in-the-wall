@@ -73,6 +73,8 @@ class Review(models.Model):
         Restaurant,
         on_delete=models.CASCADE
     )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return  f"{self.get_review_display()} on {self.created_at}"
 
