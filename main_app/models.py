@@ -19,6 +19,11 @@ OPTIONS = (
     ('A_R', 'Alternate Recommendation')
 )
 
+AM_PM_CHOICES = (
+    ('AM', 'AM'),
+    ('PM', 'PM'),
+)
+
 # Create your models here.
 
 class Restaurant(models.Model):
@@ -46,8 +51,10 @@ class Day(models.Model):
         choices=DAYS_OF_WEEK,
         default=DAYS_OF_WEEK[0][0]
     )
-    opening_time = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(24)])
-    closing_time =models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(24)])
+    opening_time = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(12)])
+    opening_hours = models.CharField(max_length=2, choices=AM_PM_CHOICES, default=AM_PM_CHOICES[0][0])
+    closing_time = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(12)])
+    closing_hours = models.CharField(max_length=2, choices=AM_PM_CHOICES, default=AM_PM_CHOICES[0][0])
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     def __str__(self):

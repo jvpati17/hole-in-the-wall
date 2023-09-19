@@ -9,4 +9,4 @@ class ReviewForm(ModelForm):
 class DayForm(ModelForm):
     class Meta:
         model = Day
-        fields = ['days', 'opening_time', 'closing_time']
+        fields = ['days', 'opening_time', 'closing_time', 'opening_hours', 'closing_hours']

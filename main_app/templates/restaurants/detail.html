@@ -32,7 +32,9 @@
             <br>
             <h3>Open:</h3>
             {% for day in restaurant.day_set.all %}
-            <p>{{ day.days }}: {{ day.opening_time }} - {{ day.closing_time }}</p>
+            <p>{{ day.get_days_display }}:
+                {{ day.opening_time }} {{ day.opening_hours }} -
+                {{ day.closing_time }} {{ day.closing_hours }}</p>
             {% endfor %}
             <form action="{% url 'add_day' restaurant.id %}" method="POST">
                 {% csrf_token %}
@@ -42,7 +44,7 @@
         </div>
     </div>
 
-        
+
     <div class="reviews">
         <form action="{% url 'add_review' restaurant.id %}" method="POST">
             {% csrf_token %}
