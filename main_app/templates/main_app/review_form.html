@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Update Your Review </h2>
+{% if object %}
+    <h2>Update Your Review <span>{{ object.name }}</span></h2>
+{% else %}
+    <h2>Add Review</h2>
+{% endif %}
+
+
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 <div class="submit_form">
     <form action="" method="POST">

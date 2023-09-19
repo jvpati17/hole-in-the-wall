@@ -77,7 +77,7 @@ class Review(models.Model):
         return  f"{self.get_review_display()} on {self.created_at}"
 
     def get_absolute_url(self):
-        return reverse('add_review', kwargs={'restaurant_id': self.id})
+        return reverse('review_detail', kwargs={'pk': self.id})
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
