@@ -3,4 +3,12 @@
 
 <h2>Find recommendations for local restaurants below:</h2>
 
+<div class="home-links">
+    {% for restaurant in restaurants %}
+    {% with restaurant.photo_set.all|first as photo %}
+    <a href="{% url 'detail' restaurant.id %}"><div class="image" style="background-image: url('{{photo.url}}');"><span class="home-rest-title">{{ restaurant.name }}</span></div></a>
+    {% endwith %}
+    {% endfor %}
+</div>
+
 {% endblock %}

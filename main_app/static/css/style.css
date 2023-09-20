@@ -96,6 +96,13 @@ p {
     text-align: justify;
 }
 
+.home-rest-title {
+    background-color: rgba(50, 1, 1, .6);
+    color: white;
+    display: block;
+    width: 200px;
+}
+
 #whole-page{
     padding: 3vh;
     display: flex;
