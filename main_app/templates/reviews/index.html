@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>My Reviews</h2>
+
+{% for review in reviews %}
+    <div class="reviewidx-card">
+        <div>
+            <span><a href="{% url 'detail' review.restaurant_id %}"><h3>{{ review.restaurant.name }}</h3></a></span>
+                <p>Date: {{ review.created_at }}</p>
+                <p>Review: {{ review.review }}</p>
+            </div>
+    </div>
+{% endfor %}
+
+
+{% endblock %}

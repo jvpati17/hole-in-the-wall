@@ -141,11 +141,11 @@ class DeleteReview(DeleteView):
     model = Review
     success_url = '/restaurants'
 
-# @login_required
-# def reviews_index(request):
-#   reviews = Review.objects.filter(user=request.user)
-#   # You could also retrieve the logged in user's reviews
-#   return render(request, 'reviews/index.html', { 'reviews': reviews })
+@login_required
+def reviews_index(request):
+  reviews = Review.objects.filter(user=request.user)
+  # You could also retrieve the logged in user's reviews
+  return render(request, 'reviews/index.html', { 'reviews': reviews })
 
 @login_required
 def add_photo(request, restaurant_id):
