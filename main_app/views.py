@@ -7,7 +7,8 @@ from .models import Restaurant, Day, Review
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from django.contrib.auth import login
+from django.utils.decorators import method_decorator
+from django.contrib.auth import login, get_user
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Restaurant, Day, Photo, DAYS_OF_WEEK
@@ -46,7 +47,8 @@ def restaurants_detail(request, restaurant_id):
         'restaurant': restaurant,
         'days': days
     })
-
+    
+@method_decorator(login_required, name='dispatch')
 class RestaurantCreate(LoginRequiredMixin, CreateView):
     model = Restaurant
     fields = ['name', 'address', 'city', 'state', 'zip_code', 'cuisine', 'dine_in', 'take_out', 'delivery', 'drive_thru']
@@ -56,15 +58,17 @@ class RestaurantCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+@method_decorator(login_required, name='dispatch')
 class RestaurantUpdate(UpdateView):
     model = Restaurant
     fields = ['dine_in', 'take_out', 'delivery', 'drive_thru']
 
+@method_decorator(login_required, name='dispatch')
 class RestaurantDelete(DeleteView):
     model = Restaurant
     success_url = '/restaurants'
 
-
+@method_decorator(login_required, name='dispatch')
 class DayCreate(CreateView):
     model = Day
     fields = ['days', 'opening_time', 'closing_time']
@@ -72,10 +76,12 @@ class DayCreate(CreateView):
 class DayDetail(DetailView):
     model = Day
 
+@method_decorator(login_required, name='dispatch')
 class DayUpdate(UpdateView):
     model = Day
     fields = ['days', 'opening_time', 'closing_time', 'opening_hours', 'closing_hours']
 
+@method_decorator(login_required, name='dispatch')
 class DayDelete(DeleteView):
     model = Day
 
@@ -87,6 +93,7 @@ class DayDelete(DeleteView):
         else:
             return reverse_lazy('index')
 
+@login_required
 def add_day(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
 
@@ -110,31 +117,37 @@ def add_day(request, restaurant_id):
         'day_form': form,
     })
 
+@login_required
 def add_review(request, restaurant_id):
-    restaurant = Restaurant.objects.get(id=restaurant_id)
-    form = ReviewForm(request.POST)
-    if form.is_valid():
-        new_review = form.save(commit=False)
-        new_review.restaurant_id = restaurant_id
-        new_review.save()
-    else:
-        form = ReviewForm()
+    if request.method == 'POST':
+        restaurant = Restaurant.objects.get(id=restaurant_id)
+        form = ReviewForm(request.POST)
+        user = get_user(request)
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.restaurant_id = restaurant_id
+            new_review.user_id = user.id
+            new_review.save()
+        else:
+            form = ReviewForm(initial={'user': user})
 
     return render(request, 'restaurants/detail.html', {
         'restaurant': restaurant,
         'review_form': form,
     })
 
+@method_decorator(login_required, name='dispatch')
 class DeleteReview(DeleteView):
     model = Review
     success_url = '/restaurants'
 
-# @login_required
-# def reviews_index(request):
-#   reviews = Review.objects.filter(user=request.user)
-#   # You could also retrieve the logged in user's reviews
-#   return render(request, 'reviews/index.html', { 'reviews': reviews })
+@login_required
+def reviews_index(request):
+  reviews = Review.objects.filter(user=request.user)
+  # You could also retrieve the logged in user's reviews
+  return render(request, 'reviews/index.html', { 'reviews': reviews })
 
+@login_required
 def add_photo(request, restaurant_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
