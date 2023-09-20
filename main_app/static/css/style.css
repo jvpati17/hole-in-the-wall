@@ -145,12 +145,14 @@ p {
     width: 40vh;
 }
 
-.rest-details > span {
+.rest-details > h3 {
     width: 100vh;
+    text-align: center;
+    font-weight: bold;
 }
 
-.rest-details > p {
-    text-align: left;
+.rest-header {
+    font-size: xx-large;
 }
 
 .days-details {
@@ -160,6 +162,23 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.days-header {
+    margin-bottom: -1vh;
+}
+
+.rest-text {
+    margin-top: -5vh;
+    margin-left: 3vh;
+}
+
+.rest-text, .days-text {
+    height: 35vh;
+}
+
+.days-text {
+    text-align: justify;
 }
 
 .add-and-edit {
@@ -177,21 +196,9 @@ p {
     border-radius: 5px;
     font-size: 14px;
     padding: 5px;
-    width: 10vh;
-}
-
-.reviews {
-    width: 80vh;
 }
 
 
-#edit-btn {
-    margin: 0 5vh 0 0
-}
-
-#del-btn {
-    margin: 0 0 0 5vh;
-}
 
 .submit_form {
     font-family: 'Mukta', sans-serif;
@@ -265,7 +272,7 @@ p {
     width: 30vh;
 }
 
-.btn {
+.btn, input::file-selector-button {
     background-color: white;
     color: #320101;
     border: solid #db1919;
@@ -273,24 +280,40 @@ p {
     font-family: 'Mukta', sans-serif;
     font-size: 14px;
     padding: 5px;
+    margin: 1px;
 }
 
-.photo-display {
-    width: 20vh;
-}
 
-.photo-display > img {
+.image {
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 200px;
+    height: 200px;
     border: solid #db1919;
+    margin: 1vh;
+    display: inline-block;
 }
 
+#photo-display {
+    background-color: #320101;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 .upload-btn {
     margin: 1vh;
 }
 
-table{
+.photo-text {
+    color: white;
+}
+
+.reviews, .review-idx {
+    width: 150vh;
+}
+
+.review-idx {
     margin: 0 auto 0 auto;
-    width: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -298,21 +321,25 @@ table{
 }
 
 tr {
-    width: 60vh;
+    width: 150vh;
 }
 
-th {
+.review-date, .review-del {
     width: 30vh;
 }
 
-td {
-    width: 30vh;
+.review-date {
+    text-align: justify;
 }
 
 .review-text {
-    width: 45vh;
+    width: 90vh;
     text-align: left;
     margin-left: 5vh;
+}
+
+.reviews {
+    margin: 0 auto 0 auto;
 }
 
 footer {
