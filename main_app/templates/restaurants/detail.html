@@ -4,69 +4,72 @@
     <div class="rest-section">
         <div class="rest-border-box">
             <div class="rest-details">
-                <span><h3>{{ restaurant.name }}</h3></span>
-                <p>Address: {{ restaurant.address }}</p>
-                <p>{{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zip_code }}</p>
-                <p>Cuisine: {{ restaurant.cuisine }}</p>
-                <p>Options: </p>
-                {% if restaurant.dine_in %}
-                <p>- Dine In</p>
-                {% endif %}
-                {% if restaurant.take_out %}
-                <p>- Take Out</p>
-                {% endif %}
-                {% if restaurant.delivery %}
-                <p>- Delivery</p>
-                {% endif %}
-                {% if restaurant.drive_thru %}
-                <p>- Drive Thru</p>
-                {% endif %}
+                <span><h3 class="rest-header">{{ restaurant.name }}</h3></span>
+                <p class="rest-text">
+                    Address: {{ restaurant.address }}
+                    {{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zip_code }}<br>
+                    Cuisine: {{ restaurant.cuisine }}<br>
+                    Options: <br>
+                    {% if restaurant.dine_in %}
+                    - Dine In<br>
+                    {% endif %}
+                    {% if restaurant.take_out %}
+                    - Take Out<br>
+                    {% endif %}
+                    {% if restaurant.delivery %}
+                    - Delivery<br>
+                    {% endif %}
+                    {% if restaurant.drive_thru %}
+                    - Drive Thru<br>
+                    {% endif %}
+                </p>
+                {% if user.is_authenticated %}
+                <div class="edit-and-del">
+                    <a href="{% url 'restaurants_update' restaurant.id %}" class="btn">Edit</a>
+                    <a href="{% url 'restaurants_delete' restaurant.id %}" class="btn">Delete</a>
+                </div>
+            {% endif %}
             </div>
             <div class="days-details">
                 <div class="days-form">
                     <br>
-                    <h3>Open:</h3>
-                    {% for day in restaurant.day_set.all %}
-                    <p>{{ day.get_days_display }}:
-                        {{ day.opening_time }} {{ day.opening_hours }} -
-                        {{ day.closing_time }} {{ day.closing_hours }}</p>
+                    <h3 class="days-header">Open:</h3>
+                    <div class="days-text">
+                        {% for day in restaurant.day_set.all %}
+                                {{ day.get_days_display }}:
+                                {{ day.opening_time }} {{ day.opening_hours }} -
+                                {{ day.closing_time }} {{ day.closing_hours }}<br>
                         {% endfor %}
-                        {% if user.is_authenticated %}
+                    </div>
+                    {% if user.is_authenticated %}
                         <div class="add-and-edit">
                             <form action="{% url 'add_day' restaurant.id %}" method="POST">
                                 {% csrf_token %}
                                 {{ day_form.as_p }}
                                 <input type="submit" class="btn" value="Add Hours">
                             </form>
-                            <a href="{% url 'days_update' restaurant.id %}" id="edit-btn">Edit Hours</a>
+                            <a href="{% url 'days_update' restaurant.id %}" class="btn" id="edit-btn">Edit Hours</a>
                         </div>
-                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-        {% if user.is_authenticated %}
-            <div class="edit-and-del">
-                <a href="{% url 'restaurants_update' restaurant.id %}" id="edit-btn">Edit</a>
-                <a href="{% url 'restaurants_delete' restaurant.id %}" id="del-btn">Delete</a>
-            </div>
-        {% endif %}
 </div>
 
 
-    <div class="photo-display">
-    {% for photo in restaurant.photo_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}">
-    {% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
+    <div id="photo-display">
+        {% for photo in restaurant.photo_set.all %}
+        <div class="image" style="background-image: url('{{photo.url}}');"></div>
+        {% empty %}
+        <div class="photo-text">No Photos Uploaded</div>
+        {% endfor %}
     </div>
 
     {% if user.is_authenticated %}
         <form action="{% url 'add_photo' restaurant.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
             {% csrf_token %}
-            <input type="file" name="photo-file">
-            <br><br>
+            <input class="btn" type="file" name="photo-file">
             <button type="submit" class="btn" id="upload-btn">Upload Photo</button>
         </form>
     {% endif %}
@@ -80,9 +83,9 @@
             </form>
         {% endif %}
         <br>
-        <table class="striped">
+        <table class="review-idx">
             <thead>
-                <tr><th>Date</th><th>Review</th>{% if user.is_authenticated %}<th>Delete</th>{% endif %}</tr>
+                <tr><th class="review-date">Date</th><th class="review-text">Review</th>{% if user.is_authenticated %}<th class="review-del">Delete</th>{% endif %}</tr>
             </thead>
             <tbody>
                 {% for review in restaurant.review_set.all %}
