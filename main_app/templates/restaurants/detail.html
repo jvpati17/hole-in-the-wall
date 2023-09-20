@@ -32,19 +32,17 @@
                         {{ day.closing_time }} {{ day.closing_hours }}</p>
                         {% endfor %}
                         {% if user.is_authenticated %}
+                        <div class="add-and-edit">
                             <form action="{% url 'add_day' restaurant.id %}" method="POST">
                                 {% csrf_token %}
                                 {{ day_form.as_p }}
                                 <input type="submit" class="btn" value="Add Hours">
                             </form>
+                            <a href="{% url 'days_update' restaurant.id %}" id="edit-btn">Edit Hours</a>
+                        </div>
                         {% endif %}
                 </div>
             </div>
-            {% if user.is_authenticated %}
-                <div class="edit-and-del">
-                    <a href="{% url 'days_update' restaurant.id %}" id="edit-btn">Edit Hours</a>
-                </div>
-            {% endif %}
         </div>
     </div>
         {% if user.is_authenticated %}
