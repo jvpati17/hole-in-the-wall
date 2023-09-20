@@ -15,7 +15,8 @@ from .models import Restaurant, Day, Photo, DAYS_OF_WEEK
 from .forms import ReviewForm, DayForm
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    restaurants = Restaurant.objects.all()
+    return render(request, 'home.html', {'restaurants': restaurants})
 
 def about(request):
     return render(request, 'about.html')
