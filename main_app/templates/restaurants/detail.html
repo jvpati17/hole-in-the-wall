@@ -92,7 +92,7 @@
                 <tr>
                     <td class="review-date">{{review.created_at}}</td>
                     <td class="review-text">{{review.review}}</td>
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and review.user_id == user.id %}
                         <td class="review-del"><a href="{% url 'delete_review' review.id %}">X</a></td>
                     {% endif %}
                 </tr>
