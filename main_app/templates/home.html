@@ -6,9 +6,21 @@
 <div class="home-links">
     {% for restaurant in restaurants %}
     {% with restaurant.photo_set.all|first as photo %}
-    <a href="{% url 'detail' restaurant.id %}"><div class="image" style="background-image: url('{{photo.url}}');"><span class="home-rest-title">{{ restaurant.name }}</span></div></a>
+        {% if photo %}
+            <a href="{% url 'detail' restaurant.id %}">
+                <div class="image" style="background-image: url('{{photo.url}}');">
+                    <span class="home-rest-title">{{ restaurant.name }}</span>
+                </div>
+            </a>
+        {% else %}
+        <a href="{% url 'detail' restaurant.id %}">
+                <div class="image" style="background-image: url('/static/images/no_image.png')">
+                    <span class="home-rest-title">{{ restaurant.name }}</span>
+                </div>
+            </a>
+        {% endif %}
     {% endwith %}
-    {% endfor %}
+{% endfor %}
 </div>
 
 {% endblock %}
