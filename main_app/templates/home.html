@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <h2>Find recommendations for local restaurants below:</h2>
 
@@ -13,8 +14,8 @@
                 </div>
             </a>
         {% else %}
-        <a href="{% url 'detail' restaurant.id %}">
-                <div class="image" style="background-image: url('/static/images/no_image.png')">
+            <a href="{% url 'detail' restaurant.id %}">
+                <div class="image" style="background-image: url({% static 'images/no_image.png' %})">
                     <span class="home-rest-title">{{ restaurant.name }}</span>
                 </div>
             </a>
